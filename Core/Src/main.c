@@ -22,7 +22,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
+#include "FreeRTOS.h"
+#include "task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,7 +49,7 @@ SPI_HandleTypeDef hspi1;
 PCD_HandleTypeDef hpcd_USB_FS;
 
 /* USER CODE BEGIN PV */
-
+#define DWT_CTRL		(*(volatile uint32_t*)0xE0001000)
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -97,7 +99,7 @@ int main(void)
   MX_SPI1_Init();
   MX_USB_PCD_Init();
   /* USER CODE BEGIN 2 */
-
+  DWT_CTRL |= (1 << 0);
   /* USER CODE END 2 */
 
   /* Infinite loop */
